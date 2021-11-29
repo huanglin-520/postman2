@@ -1,0 +1,519 @@
+{
+	"info": {
+		"_postman_id": "d4410118-9bf9-4e81-a041-939fd13aa5a5",
+		"name": "IHRM测试",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "城市列表",
+			"item": [
+				{
+					"name": "city_list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/sys/city",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"city"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "登录",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"tid\", pm.response.json()[\"data\"]);\r",
+									"pm.environment.set(\"variable_key\", \"variable_value\");\r",
+									"\r",
+									"//获取环境变量的值\r",
+									"var mobile = pm.environment.get(\"mobile2\");\r",
+									"var password = pm.environment.get(\"password2\");\r",
+									"console.log(\"测试环境中的mobile是:\" + mobile);\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"console.log(\"测试环境中的password是:\"+password);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":{{mobile2}},\"password\":{{password2}}}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sys/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "用户资料",
+			"item": [
+				{
+					"name": "user_info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1f52698d-d96c-4923-83e6-1fe0e54f76d8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/company/department",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"company",
+								"department"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "组织架构",
+			"item": [
+				{
+					"name": "组织架构列表",
+					"item": [
+						{
+							"name": "department_list",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "获取部门信息",
+					"item": [
+						{
+							"name": "department_info",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "1f52698d-d96c-4923-83e6-1fe0e54f76d8",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/company/department/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"company",
+										"department",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "部门添加",
+					"item": [
+						{
+							"name": "add_apartment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "1f52698d-d96c-4923-83e6-1fe0e54f76d8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\":\"Chinese\",\"code\":\"888\"}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/company/department",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"company",
+										"department"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "部门修改",
+					"item": [
+						{
+							"name": "department_alter",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "1f52698d-d96c-4923-83e6-1fe0e54f76d8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\":\"Janpanese\",\"code\":\"666\"}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/company/department/id=666",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"company",
+										"department",
+										"id=666"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "删除部门",
+					"item": [
+						{
+							"name": "del_apartment",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "1f52698d-d96c-4923-83e6-1fe0e54f76d8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/company/department/:id=888",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"company",
+										"department",
+										":id=888"
+									],
+									"variable": [
+										{
+											"key": "id=888",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "员工列表",
+					"item": [
+						{
+							"name": "Worker",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{tid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/sys/user?page=1&size=10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"sys",
+										"user"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "员工查询",
+					"item": [
+						{
+							"name": "select_worker",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{tid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/sys/user/:target",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"sys",
+										"user",
+										":target"
+									],
+									"variable": [
+										{
+											"key": "target",
+											"value": "{{target_id}}\n"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "删除员工",
+					"item": [
+						{
+							"name": "del_worker",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "f06d36c0-3b16-46c3-b5e5-916e40315190",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/sys/user/:target",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"sys",
+										"user",
+										":target"
+									],
+									"variable": [
+										{
+											"key": "target",
+											"value": "1452201819198455808"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
